@@ -96,8 +96,11 @@ export default function Home() {
       {searchResults.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {searchResults.map((movie) => (
-            <Link href={`/movie/${movie.id}`} key={movie.id}>
-              <Card className="bg-[#2A2A2A] border-gray-700 hover:bg-[#3A3A3A] transition-colors duration-200">
+            <Card
+              key={movie.id}
+              className="bg-[#2A2A2A] border-gray-700 hover:bg-[#3A3A3A] transition-colors duration-200"
+            >
+              <Link href={`/movie/${movie.id}`}>
                 <CardContent className="p-4">
                   <Image
                     src={movie.image}
@@ -111,41 +114,43 @@ export default function Home() {
                   </h2>
                   <p className="text-gray-400">{movie.year}</p>
                 </CardContent>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           ))}
         </div>
       ) : (
         <>
-          <section className="py-8">
+          <section className="py-8 cursor-pointer transition-colors duration-200 rounded-lg">
             <h2 className="text-2xl font-bold text-white mb-4">
               Featured Today
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
               {["joker.jpeg", "shutin.jpeg", "mortal.jpeg"].map((image, i) => (
                 <Card
                   key={i}
                   className="bg-[#2A2A2A] border-gray-700 text-white"
                 >
-                  <CardContent className="p-4">
-                    <Image
-                      src={`/images/${image}`}
-                      alt={`Featured movie ${i + 1}`}
-                      width={300}
-                      height={200}
-                      className="w-full h-48 object-cover mb-4 rounded"
-                    />
-                    <h3 className="text-lg font-semibold">
-                      Featured Movie {i + 1}
-                    </h3>
-                    <p className="text-sm text-gray-400">Action, Adventure</p>
-                  </CardContent>
+                  <Link href="/movie-details">
+                    <CardContent className="p-4 hover:bg-gray-800 ">
+                      <Image
+                        src={`/images/${image}`}
+                        alt={`Featured movie ${i + 1}`}
+                        width={300}
+                        height={200}
+                        className="w-full h-48 object-cover mb-4 rounded"
+                      />
+                      <h3 className="text-lg font-semibold">
+                        Featured Movie {i + 1}
+                      </h3>
+                      <p className="text-sm text-gray-400">Action, Adventure</p>
+                    </CardContent>
+                  </Link>
                 </Card>
               ))}
             </div>
           </section>
 
-          <section className="py-8">
+          <section className="py-8 cursor-pointer transition-colors duration-200 rounded-lg">
             <h2 className="text-2xl font-bold text-white mb-4">Top Picks</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {[
@@ -157,42 +162,46 @@ export default function Home() {
                 "mortal.jpeg",
               ].map((image, i) => (
                 <div key={i} className="relative group">
-                  <Image
-                    src={`/images/${image}`}
-                    alt={`Movie ${i + 1}`}
-                    width={150}
-                    height={225}
-                    className="w-full h-auto rounded"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded">
-                    <PlayCircle className="h-12 w-12 text-white" />
-                  </div>
+                  <Link href="/movie-details">
+                    <Image
+                      src={`/images/${image}`}
+                      alt={`Movie ${i + 1}`}
+                      width={150}
+                      height={225}
+                      className="w-full h-auto rounded hover:bg-gray-800 "
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded">
+                      <PlayCircle className="h-12 w-12 text-white" />
+                    </div>
+                  </Link>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="py-8">
+          <section className="py-8 cursor-pointer transition-colors duration-200 rounded-lg">
             <h2 className="text-2xl font-bold text-white mb-4">
               Trending Trailers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {["joker.jpeg", "shutin.jpeg", "mortal.jpeg"].map((image, i) => (
                 <div key={i} className="bg-[#2A2A2A] p-4 rounded-lg">
-                  <div className="relative pb-[56.25%]">
-                    <Image
-                      src={`/images/${image}`}
-                      alt={`Trailer ${i + 1}`}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded"
-                    />
-                    <PlayCircle className="absolute inset-0 m-auto h-16 w-16 text-white opacity-75" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mt-2">
-                    Trending Movie {i + 1}
-                  </h3>
-                  <p className="text-sm text-gray-400">2.5M views</p>
+                  <Link href="/movie-details">
+                    <div className="relative pb-[56.25%]">
+                      <Image
+                        src={`/images/${image}`}
+                        alt={`Trailer ${i + 1}`}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded hover:bg-gray-800 "
+                      />
+                      <PlayCircle className="absolute inset-0 m-auto h-16 w-16 text-white opacity-75" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mt-2">
+                      Trending Movie {i + 1}
+                    </h3>
+                    <p className="text-sm text-gray-400">2.5M views</p>
+                  </Link>
                 </div>
               ))}
             </div>

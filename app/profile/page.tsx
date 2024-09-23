@@ -56,7 +56,6 @@ export default function ProfilePage() {
           <TabsList>
             <TabsTrigger value="ratings">Ratings</TabsTrigger>
             <TabsTrigger value="history">Search History</TabsTrigger>
-            <TabsTrigger value="bookmarks">Bookmarks</TabsTrigger>
           </TabsList>
 
           <TabsContent value="ratings">
@@ -87,28 +86,6 @@ export default function ProfilePage() {
                 <div key={index} className="flex items-center">
                   <Clock className="mr-2 text-gray-400" />
                   <span className="text-white">{search}</span>
-                </div>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="bookmarks">
-            <div className="space-y-4">
-              {bookmarks.map((bookmark) => (
-                <div
-                  key={bookmark.id}
-                  className="flex items-center justify-between"
-                >
-                  <div>
-                    <Link
-                      href={`/movie/${bookmark.id}`}
-                      className="text-white hover:text-yellow-400"
-                    >
-                      {bookmark.title}
-                    </Link>
-                    <p className="text-sm text-gray-400">{bookmark.category}</p>
-                  </div>
-                  <Bookmark className="text-yellow-400" />
                 </div>
               ))}
             </div>
