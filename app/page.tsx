@@ -1,101 +1,204 @@
+"use client";
+
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Search, PlayCircle } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [searchQuery, setSearchQuery] = useState("");
+  const [genre, setGenre] = useState("");
+  const [year, setYear] = useState("");
+  const [rating, setRating] = useState("");
+  const [searchResults, setSearchResults] = useState<
+    { id: number; title: string; year: number; image: string }[]
+  >([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In a real app, this would fetch data from an API
+    setSearchResults([
+      {
+        id: 1,
+        title: "The Shawshank Redemption",
+        year: 1994,
+        image: "/images/joker.jpeg",
+      },
+      {
+        id: 2,
+        title: "The Godfather",
+        year: 1972,
+        image: "/images/shutin.jpeg",
+      },
+      {
+        id: 3,
+        title: "The Dark Knight",
+        year: 2008,
+        image: "/images/mortal.jpeg",
+      },
+    ]);
+  };
+
+  return (
+    <div className="space-y-8">
+      <form onSubmit={handleSearch} className="space-y-4">
+        <div className="flex space-x-4">
+          <Input
+            type="text"
+            placeholder="Search movies or actors"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="flex-grow bg-[#2A2A2A] border-gray-700 text-white"
+          />
+          <Button
+            type="submit"
+            className="bg-[#F5C518] text-black hover:bg-[#F5C518]/80"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Search className="mr-2 h-4 w-4" /> Search
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div className="flex space-x-4">
+          <select
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            className="p-2 border rounded bg-[#2A2A2A] border-gray-700 text-white"
+          >
+            <option value="">All Genres</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+          </select>
+          <Input
+            type="number"
+            placeholder="Release Year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            min="1900"
+            max="2023"
+            className="bg-[#2A2A2A] border-gray-700 text-white"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <select
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            className="p-2 border rounded bg-[#2A2A2A] border-gray-700 text-white"
+          >
+            <option value="">All Ratings</option>
+            <option value="9">9+</option>
+            <option value="8">8+</option>
+            <option value="7">7+</option>
+          </select>
+        </div>
+      </form>
+
+      {searchResults.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {searchResults.map((movie) => (
+            <Link href={`/movie/${movie.id}`} key={movie.id}>
+              <Card className="bg-[#2A2A2A] border-gray-700 hover:bg-[#3A3A3A] transition-colors duration-200">
+                <CardContent className="p-4">
+                  <Image
+                    src={movie.image}
+                    alt={movie.title}
+                    width={300}
+                    height={200}
+                    className="w-full h-48 object-cover mb-4 rounded"
+                  />
+                  <h2 className="text-xl font-semibold text-white">
+                    {movie.title}
+                  </h2>
+                  <p className="text-gray-400">{movie.year}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <>
+          <section className="py-8">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              Featured Today
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {["joker.jpeg", "shutin.jpeg", "mortal.jpeg"].map((image, i) => (
+                <Card
+                  key={i}
+                  className="bg-[#2A2A2A] border-gray-700 text-white"
+                >
+                  <CardContent className="p-4">
+                    <Image
+                      src={`/images/${image}`}
+                      alt={`Featured movie ${i + 1}`}
+                      width={300}
+                      height={200}
+                      className="w-full h-48 object-cover mb-4 rounded"
+                    />
+                    <h3 className="text-lg font-semibold">
+                      Featured Movie {i + 1}
+                    </h3>
+                    <p className="text-sm text-gray-400">Action, Adventure</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <section className="py-8">
+            <h2 className="text-2xl font-bold text-white mb-4">Top Picks</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {[
+                "joker.jpeg",
+                "shutin.jpeg",
+                "mortal.jpeg",
+                "joker.jpeg",
+                "shutin.jpeg",
+                "mortal.jpeg",
+              ].map((image, i) => (
+                <div key={i} className="relative group">
+                  <Image
+                    src={`/images/${image}`}
+                    alt={`Movie ${i + 1}`}
+                    width={150}
+                    height={225}
+                    className="w-full h-auto rounded"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded">
+                    <PlayCircle className="h-12 w-12 text-white" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="py-8">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              Trending Trailers
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {["joker.jpeg", "shutin.jpeg", "mortal.jpeg"].map((image, i) => (
+                <div key={i} className="bg-[#2A2A2A] p-4 rounded-lg">
+                  <div className="relative pb-[56.25%]">
+                    <Image
+                      src={`/images/${image}`}
+                      alt={`Trailer ${i + 1}`}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded"
+                    />
+                    <PlayCircle className="absolute inset-0 m-auto h-16 w-16 text-white opacity-75" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mt-2">
+                    Trending Movie {i + 1}
+                  </h3>
+                  <p className="text-sm text-gray-400">2.5M views</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 }
