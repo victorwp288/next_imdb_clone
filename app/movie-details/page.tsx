@@ -83,7 +83,7 @@ export default function MovieDetailsPageComponent() {
                       key={rating}
                       variant={userRating === rating ? 'default' : 'outline'}
                       onClick={() => handleRating(rating)}
-                      className={userRating === rating ? 'bg-yellow-400 text-black' : 'text-white'}
+                      className={userRating === rating ? 'bg-yellow-400 text-black' : 'text-black'}
                     >
                       {rating}
                     </Button>
