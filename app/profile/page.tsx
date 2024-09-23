@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, Clock, Bookmark } from "lucide-react";
+import { Star, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -27,12 +27,6 @@ export default function ProfilePage() {
     "Christopher Nolan",
     "Pulp Fiction",
     "Marvel movies",
-  ];
-
-  const bookmarks = [
-    { id: 1, title: "Inception", category: "Favorites" },
-    { id: 2, title: "The Matrix", category: "Watch Later" },
-    { id: 3, title: "Interstellar", category: "Sci-Fi" },
   ];
 
   return (
